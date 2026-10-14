@@ -18,12 +18,17 @@ function Navbar(){
     return(
 
         <nav className="
-            mx-auto mt-4
+            mx-4
+            sm:mx-6
+            lg:mx-auto
+            mt-4
             max-w-6xl
             rounded-xl
             border
             bg-background
-            px-6 py-3
+            px-4
+            sm:px-6
+            py-3
             shadow-sm
         ">
 
@@ -32,12 +37,12 @@ function Navbar(){
                 flex
                 items-center
                 justify-between
+                gap-4
             ">
 
 
-                {/* Logo */}
+                <div className="shrink-0">
 
-                <div>
                     <p className="
                         text-xl
                         font-heading
@@ -45,17 +50,18 @@ function Navbar(){
                     ">
                         KraftHub
                     </p>
+
                 </div>
 
 
-
-                {/* Desktop Navigation */}
 
                 <div className="
                     hidden
                     md:flex
                     items-center
                     gap-6
+                    flex-1
+                    justify-center
                 ">
 
                     <Button asChild variant="link">
@@ -66,21 +72,21 @@ function Navbar(){
 
 
                     <Button asChild variant="link">
-                        <Link to="/Marketplace">
+                        <Link to="/marketplace">
                             Marketplace
                         </Link>
                     </Button>
 
 
                     <Button asChild variant="link">
-                        <Link to="/Community">
+                        <Link to="/community">
                             Community
                         </Link>
                     </Button>
 
 
                     <Button asChild variant="link">
-                        <Link to="/About">
+                        <Link to="/about">
                             About
                         </Link>
                     </Button>
@@ -90,13 +96,12 @@ function Navbar(){
 
 
 
-                {/* Desktop Actions */}
-
                 <div className="
                     hidden
                     md:flex
                     items-center
                     gap-2
+                    shrink-0
                 ">
 
                     <ThemeToggle />
@@ -109,8 +114,8 @@ function Navbar(){
 
                         :
 
-                        <Button 
-                            asChild 
+                        <Button
+                            asChild
                             variant="outline"
                             size="lg"
                         >
@@ -124,7 +129,7 @@ function Navbar(){
                     }
 
 
-                    <Button 
+                    <Button
                         variant="outline"
                         size="lg"
                     >
@@ -138,8 +143,6 @@ function Navbar(){
 
 
 
-                {/* Mobile Actions */}
-
                 <div className="
                     flex
                     md:hidden
@@ -152,20 +155,34 @@ function Navbar(){
 
                     <Button
                         variant="outline"
-                        size="icon"
+                        size="lg"
                         onClick={() => setMobileOpen(!mobileOpen)}
                     >
 
-                        {
-                            mobileOpen ?
+                        <div
+                            className={`
+                                transition-transform
+                                duration-300
+                                ${
+                                    mobileOpen
+                                    ? "rotate-90"
+                                    : "rotate-0"
+                                }
+                            `}
+                        >
 
-                            <X className="h-5 w-5"/>
+                            {
+                                mobileOpen ?
 
-                            :
+                                <X className="h-5 w-5"/>
 
-                            <Menu className="h-5 w-5"/>
+                                :
 
-                        }
+                                <Menu className="h-5 w-5"/>
+
+                            }
+
+                        </div>
 
                     </Button>
 
@@ -177,91 +194,99 @@ function Navbar(){
 
 
 
-            {/* Mobile Menu */}
+            <div
+                className={`
+                    md:hidden
+                    overflow-hidden
+                    transition-all
+                    duration-300
+                    ease-in-out
 
-            {
-                mobileOpen && (
+                    ${
+                        mobileOpen
+                        ? "max-h-96 opacity-100 mt-4 pt-4"
+                        : "max-h-0 opacity-0 mt-0 pt-0"
+                    }
+                `}
+            >
+
+                <div className="
+                    border-t
+                    flex
+                    flex-col
+                    gap-2
+                ">
+
+
+                    <Button asChild variant="link">
+                        <Link to="/">
+                            Home
+                        </Link>
+                    </Button>
+
+
+                    <Button asChild variant="link">
+                        <Link to="/marketplace">
+                            Marketplace
+                        </Link>
+                    </Button>
+
+
+                    <Button asChild variant="link">
+                        <Link to="/community">
+                            Community
+                        </Link>
+                    </Button>
+
+
+                    <Button asChild variant="link">
+                        <Link to="/about">
+                            About
+                        </Link>
+                    </Button>
+
+
 
                     <div className="
-                        md:hidden
-                        mt-4
                         border-t
-                        pt-4
-                        flex
-                        flex-col
-                        gap-2
+                        mt-2
+                        pt-3
                     ">
 
 
-                        <Button asChild variant="link">
-                            <Link to="/">
-                                Home
-                            </Link>
-                        </Button>
+                        {
+                            user ?
 
+                            <UserMenu />
 
-                        <Button asChild variant="link">
-                            <Link to="/Marketplace">
-                                Marketplace
-                            </Link>
-                        </Button>
+                            :
 
+                            <Button
+                                asChild
+                                variant="outline"
+                                className="w-full"
+                            >
 
-                        <Button asChild variant="link">
-                            <Link to="/Community">
-                                Community
-                            </Link>
-                        </Button>
+                                <Link to="/auth">
 
+                                    <User className="h-5 w-5 mr-2"/>
 
-                        <Button asChild variant="link">
-                            <Link to="/About">
-                                About
-                            </Link>
-                        </Button>
+                                    Login
 
+                                </Link>
 
+                            </Button>
 
-                        <div className="
-                            border-t
-                            mt-2
-                            pt-3
-                        ">
-
-
-                            {
-                                user ?
-
-                                <UserMenu />
-
-                                :
-
-                                <Button 
-                                    asChild 
-                                    variant="outline"
-                                    className="w-full"
-                                >
-
-                                    <Link to="/auth">
-
-                                        <User className="h-5 w-5 mr-2"/>
-
-                                        Login
-
-                                    </Link>
-
-                                </Button>
-
-                            }
-
-
-                        </div>
+                        }
 
 
                     </div>
 
-                )
-            }
+
+                </div>
+
+
+            </div>
 
 
         </nav>

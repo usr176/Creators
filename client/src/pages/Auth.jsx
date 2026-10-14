@@ -9,6 +9,8 @@ export default function Auth() {
                 items-start
                 justify-center
                 pt-16
+                pb-16
+                min-h-[calc(100vh-140px)]
             "
         >
             <AuthCard />
