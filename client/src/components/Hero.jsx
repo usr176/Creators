@@ -14,7 +14,7 @@ export default function Hero() {
                 className="
                     absolute
                     inset-0
-                    h-full
+                    h-auto
                     w-full
                     object-cover
                 "
