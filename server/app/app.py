@@ -28,7 +28,7 @@ def create_app():
 
     CORS(app,
          origins=[
-             "https://kraft-hub.vercel.app/",
+             "https://kraft-hub.vercel.app",
              "http://localhost:5173"
          ],
          supports_credentials=True
