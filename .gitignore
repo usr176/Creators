@@ -1,0 +1,22 @@
+# VS Code settings
+.vscode/
+
+# Dependencies
+node_modules/
+venv/
+
+# Environment variables
+.env
+.env.*
+
+# Build files
+dist/
+build/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+Thumbs.db
