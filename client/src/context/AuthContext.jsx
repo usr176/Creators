@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
             try {
 
                 const response = await fetch(
-                    "http://localhost:5000/api/auth/me",
+                    `${import.meta.env.VITE_API_URL}/auth/me`,
                     {
                         credentials: "include"
                     }
@@ -57,7 +57,7 @@ export function AuthProvider({ children }) {
 
     async function logout() {
         await fetch(
-            "http://localhost:5000/api/auth/logout",
+            `${import.meta.env.VITE_API_URL}/auth/logout`,
             {
                 method:"POST",
                 credentials:"include"

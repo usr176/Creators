@@ -27,8 +27,17 @@ def create_app():
     app.permanent_session_lifetime = timedelta(days=2)
 
     CORS(app,
+         origins=[
+             "https://kraft-hub.vercel.app/",
+             "http://localhost:5173"
+         ],
          supports_credentials=True
         )
+
+    app.config.update(
+        SESSION_COOKIE_SAMESITE="None",
+        SESSION_COOKIE_SECURE=True
+    )
 
     app.register_blueprint(
         home,
