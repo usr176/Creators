@@ -12,8 +12,8 @@ class Config:
     FLASK_PORT = os.getenv("FLASK_PORT")
 
 # routes
-from routes.home import home
-from routes.auth import auth
+from app.routes.home import home
+from app.routes.auth import auth
 
 def create_app():
 
