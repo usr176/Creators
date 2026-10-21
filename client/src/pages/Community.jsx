@@ -10,7 +10,7 @@ export default function Community() {
             m-5
         ">
 
-            <h1 className="text-4xl font-bold font-heading">
+            <h1 className="text-4xl font-extralight font-heading">
                 Community 
             </h1>
 
