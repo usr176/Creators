@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { LogOut, Settings, User, CircleUserRound } from "lucide-react";
+
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -6,141 +9,74 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-    User,
-    Settings,
-    LogOut
-} from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 
 
-export default function UserMenu(){
+export default function UserMenu() {
 
-    const {
-        user,
-        logout
-    } = useAuth();
+    const { user, logout } = useAuth();
 
+    if (!user) return null;
 
-    const navigate = useNavigate();
-
-    const firstLetter = user.name.charAt(0).toUpperCase()
-
+    const initial = (user.name ?? "?").charAt(0).toUpperCase();
 
     return (
-
         <DropdownMenu>
 
             <DropdownMenuTrigger asChild>
-
-                <Button variant="outline"size="lg">
-                     <User className="h-5 w-5" />
+                <Button
+                    variant="outline"
+                    size="icon"
+                    aria-label="Account menu"
+                    className="h-10 w-10 rounded-full border-primary bg-primary font-semibold text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground"
+                >
+                    <CircleUserRound />
                 </Button>
-
             </DropdownMenuTrigger>
 
+            <DropdownMenuContent align="end" sideOffset={10} className="w-64 p-2">
 
-
-            <DropdownMenuContent
-                align="end"
-                className="w-56"
-            >
-
-
-                <DropdownMenuLabel>
-
-                    <div className="flex items-center gap-3">
-
-
-                        <div
-                            className="
-                                h-10
-                                w-10
-                                rounded-full
-                                bg-primary
-                                text-primary-foreground
-                                flex
-                                items-center
-                                justify-center
-                                font-semibold
-                            "
-                        >
-                            {firstLetter}
-                        </div>
-
-
-                        <div>
-
-                            <p className="font-medium">
-                                {user.name}
-                            </p>
-
-                            <p className="
-                                text-sm
-                                text-muted-foreground
-                            ">
-                                {user.email}
-                            </p>
-
-                        </div>
-
-
+                <DropdownMenuLabel className="flex items-center gap-3 p-2 font-normal">
+                    <span
+                        aria-hidden="true"
+                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground"
+                    >
+                        {initial}
+                    </span>
+                    <div className="min-w-0">
+                        <p className="truncate font-medium">{user.name}</p>
+                        <p className="truncate text-sm text-muted-foreground">{user.email}</p>
                     </div>
-
-
                 </DropdownMenuLabel>
 
-
-
                 <DropdownMenuSeparator />
 
-
-
-                <DropdownMenuItem
-                    onClick={() => navigate("/profile")}
-                >
-
-                    <User className="mr-2 h-4 w-4" />
-
-                    Profile
-
+                <DropdownMenuItem asChild className="cursor-pointer gap-2 py-2">
+                    <Link to="/profile">
+                        <User className="h-4 w-4" />
+                        My profile
+                    </Link>
                 </DropdownMenuItem>
 
-
-
-                <DropdownMenuItem>
-
-                    <Settings className="mr-2 h-4 w-4" />
-
+                <DropdownMenuItem disabled className="gap-2 py-2">
+                    <Settings className="h-4 w-4" />
                     Settings
-
+                    <span className="ml-auto text-xs text-muted-foreground">Soon</span>
                 </DropdownMenuItem>
 
-
-
                 <DropdownMenuSeparator />
-
-
 
                 <DropdownMenuItem
                     onClick={logout}
+                    className="cursor-pointer gap-2 py-2 text-destructive focus:text-destructive"
                 >
-
-                    <LogOut className="mr-2 h-4 w-4" />
-
-                    Logout
-
+                    <LogOut className="h-4 w-4" />
+                    Log out
                 </DropdownMenuItem>
 
-
             </DropdownMenuContent>
-
-
         </DropdownMenu>
-
     );
 }

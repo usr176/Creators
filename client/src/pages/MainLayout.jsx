@@ -8,8 +8,8 @@ function MainLayout(){
 
     return (
 
-        <div className="flex min-h-screen flex-col overflow-x-hidden">
-            <div className="shrink-0">
+        <div className="flex min-h-screen flex-col overflow-x-clip">
+            <div className="sticky top-0 z-40 shrink-0">
                 <Navbar />
             </div>
             

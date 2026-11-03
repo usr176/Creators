@@ -66,6 +66,26 @@ export function AuthProvider({ children }) {
         setUser(null);
     }
 
+    async function updateProfile(changes) {
+        const response = await fetch(
+            `${import.meta.env.VITE_API_URL}/auth/me`,
+            {
+                method: "PATCH",
+                credentials: "include",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(changes),
+            }
+        );
+
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+            throw new Error(data.error || data.message || "Could not update your profile");
+        }
+
+        setUser((prev) => ({ ...prev, ...(data.user ?? changes) }));
+    }
+
 
     return (
         <AuthContext.Provider
@@ -73,7 +93,8 @@ export function AuthProvider({ children }) {
                 user,
                 login,
                 logout,
-                loading
+                loading,
+                updateProfile
             }}
         >
             {children}
