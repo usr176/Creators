@@ -116,23 +116,8 @@ function Footer() {
                         <FooterLink to="/about">About</FooterLink>
                     </FooterColumn>
 
-                    <FooterColumn title="Account">
-                        {user ? (
-                            <FooterLink to="/profile">My profile</FooterLink>
-                        ) : (
-                            <FooterLink to="/auth">Log in or sign up</FooterLink>
-                        )}
-                        <li>
-                            <button type="button" onClick={openCart} className={linkClass}>
-                                Your cart
-                            </button>
-                        </li>
-                        <FooterLink to="/checkout">Checkout</FooterLink>
-                    </FooterColumn>
-
                     <FooterColumn title="Support">
                         <FooterLink to="/guidelines">Campus guidelines</FooterLink>
-                        <FooterLink href={`mailto:${SITE.email}`}>Contact us</FooterLink>
                         <FooterLink
                             href={`mailto:${SITE.email}?subject=${encodeURIComponent("Report a problem")}`}
                         >
