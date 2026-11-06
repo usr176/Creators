@@ -1,14 +1,15 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-// Starts every new page at the top. Without this, clicking a footer link
-// opens the next page scrolled down to where the footer was.
+// Scrolls to the top on every navigation: new pages, query changes (?category=...),
+// and even clicking a link to the page you are already on.
+// Must be rendered inside <BrowserRouter>.
 export default function ScrollToTop() {
-    const { pathname } = useLocation();
+    const { key } = useLocation();
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }, [key]);
 
     return null;
 }

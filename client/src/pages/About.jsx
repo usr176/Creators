@@ -9,9 +9,12 @@ export default function Creators() {
         ">
             
             <div className="max-w-5xl mx-auto">
-                <h1 className="text-4xl font-extralight font-heading pb-6 pt-6 text-center">
-                    About
-                </h1>
+
+                <header className="pb-8">
+                    <h1 className="font-serif text-5xl font-bold tracking-tight sm:text-6xl">
+                        About
+                    </h1>
+                </header>
 
                 <div className="mt-6 mb-6">
                     <h2 className="font-light text-2xl pb-4 pt-1">

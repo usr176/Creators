@@ -107,9 +107,14 @@ export default function Marketplace() {
             py-6
             ">
 
-            <h1 className="text-4xl font-extralight font-heading p-6 w-full text-center">
-                Marketplace
-            </h1>
+            <header className="pb-8">
+                <h1 className="font-serif text-5xl font-bold tracking-tight sm:text-6xl">
+                    Marketplace
+                </h1>
+                <p className="mt-4 max-w-xl font-serif text-lg leading-relaxed text-muted-foreground">
+                    Discover student handmade crafts.
+                </p>
+            </header>
 
             {/* Search + sort */}
             <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center">

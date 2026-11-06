@@ -1,7 +1,9 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, ScrollRestoration } from "react-router-dom";
 
 import { Toaster } from "@/components/ui/sonner";
 import { CartProvider } from "@/context/CartContext";
+
+import ScrollToTop from "./components/ScrollToTop";
 
 import MainLayout from "./pages/MainLayout";
 
@@ -11,7 +13,8 @@ import ProductDetail from "./pages/ProductDetail";
 import Store from "./pages/Store";
 import Checkout from "./pages/Checkout";
 import Community from "./pages/Community";
-import About from "./pages/About"
+import About from "./pages/About";
+import Article from "./pages/Article";
 
 import Auth from "./pages/Auth";
 import Profile from "./pages/profile";
@@ -27,6 +30,7 @@ function App() {
   return (
     <CartProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
 
           <Route element={<MainLayout />}>
@@ -38,6 +42,7 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/Community" element={<Community />} />
             <Route path="/About" element={<About />} />
+            <Route path="/community/:slug" element={<Article />} />
 
             <Route path="/auth" element={<Auth />} />
             <Route path="/profile" element={<Profile />} />

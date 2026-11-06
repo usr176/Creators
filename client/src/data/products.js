@@ -51,6 +51,12 @@ export const STORES = [
         followers: 970, joined: "2026-09-12", university: "FAST NUCES",
         avatar: null, banner: null,
     },
+    {
+        id: 7, name: "KraftHub", handle: "@krafthub", owner: "The KraftHub team", official: true,
+        bio: "Official guides, starter kits and picks from the KraftHub team.",
+        followers: 3200, joined: "2026-07-15", university: "FAST NUCES",
+        avatar: null, banner: null,
+    },
 ];
 
 // stock: units available. 0 = out of stock.
@@ -224,6 +230,34 @@ export const PRODUCTS = [
         highlights: ["12 cupcakes per box", "Vanilla and chocolate", "Buttercream frosting", "Baked to order"],
         images: [],   // extra photos: ["/img/a.jpg", ...]
         createdAt: "2026-10-27",
+    },
+    {
+        id: 13,
+        title: "Linocut Starter Set",
+        desc: "Everything for your first linocut: blocks, gouges, ink, a roller and a pressing spoon.",
+        price: 3200,
+        stock: 15,
+        category: "Art & Illustration",
+        storeId: 7,
+        image: null,
+        details: "A starter set for your first linocut. It includes two soft-cut printing blocks, five carving gouges, a tube of water-based black ink, a roller and a wooden spoon for pressing. A short written guide is included.",
+        highlights: ["Two soft-cut printing blocks", "Five carving gouges", "Water-based ink and roller", "Beginner guide included"],
+        images: [],   // extra photos: ["/img/a.jpg", ...]
+        createdAt: "2026-11-04",
+    },
+    {
+        id: 14,
+        title: "Beginner Embroidery Kit",
+        desc: "A pre-printed floral pattern, wooden hoop, six thread colors, needles and a stitch guide.",
+        price: 2400,
+        stock: 20,
+        category: "Clothing & Textiles",
+        storeId: 7,
+        image: null,
+        details: "A beginner kit with a pre-printed cotton pattern, a 15 cm wooden hoop, six colors of embroidery thread, needles and a stitch guide card. Pairs with the five-stitch guide in the community section.",
+        highlights: ["Pre-printed floral pattern", "15 cm wooden hoop", "Six colors of thread", "Stitch guide included"],
+        images: [],   // extra photos: ["/img/a.jpg", ...]
+        createdAt: "2026-11-03",
     },
 ];
 

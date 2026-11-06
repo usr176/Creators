@@ -92,7 +92,7 @@ function Footer() {
 
     return (
         <footer className="bg-neutral-900 text-neutral-300">
-            <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+            <div className="shrink-0 mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 mt-12 sm:mt-16">
 
                 {/* Link columns */}
                 <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
@@ -116,19 +116,10 @@ function Footer() {
                         <FooterLink to="/about">About</FooterLink>
                     </FooterColumn>
 
-                    <FooterColumn title="Support">
-                        <FooterLink to="/guidelines">Campus guidelines</FooterLink>
-                        <FooterLink
-                            href={`mailto:${SITE.email}?subject=${encodeURIComponent("Report a problem")}`}
-                        >
-                            Report a problem
-                        </FooterLink>
-                    </FooterColumn>
-
                     <FooterColumn title="Legal">
                         <FooterLink to="/terms">Terms of use</FooterLink>
                         <FooterLink to="/privacy">Privacy policy</FooterLink>
-                        <FooterLink to="/guidelines">Community rules</FooterLink>
+                        <FooterLink to="/guidelines">Guidelines</FooterLink>
                     </FooterColumn>
                 </div>
 

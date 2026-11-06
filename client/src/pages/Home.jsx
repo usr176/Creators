@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/carousel";
 
 import { PRODUCTS, STORES, getProductsByStore, getStoreById } from "@/data/products";
+import { useAuth } from "@/context/AuthContext";
+import { cn } from "@/lib/utils";
 
 
 /* ---------- Shared section header ---------- */
@@ -117,14 +119,14 @@ function FeaturedCarousel() {
                 </CarouselContent>
 
                 {/* Arrows sit inside the edges so they never get clipped; touch users just swipe */}
-                <CarouselPrevious className="left-2 top-[38%] hidden sm:inline-flex" />
-                <CarouselNext className="right-2 top-[38%] hidden sm:inline-flex" />
+                <CarouselPrevious className="w-8 h-20" />
+                <CarouselNext className="w-8 h-20" />
             </Carousel>
         </section>
     );
 }
 
-/* ---------- Storefronts, testimonial style ---------- */
+/* ---------- Stores ---------- */
 
 function StoreQuote({ store }) {
     const count = getProductsByStore(store.id).length;
@@ -169,7 +171,9 @@ function StoreQuote({ store }) {
 }
 
 function Storefronts() {
-    const makers = [...STORES].sort((a, b) => b.followers - a.followers).slice(0, 3);
+    const makers = STORES.filter((s) => !s.official)
+        .sort((a, b) => b.followers - a.followers)
+        .slice(0, 3);
 
     return (
         <section>
@@ -191,27 +195,46 @@ function Storefronts() {
 /* ---------- Call to action ---------- */
 
 function JoinCta() {
+
+    const { user, loading } = useAuth();
+
+    const firstName = user?.name?.split(" ")[0];
+
     return (
         <section className="rounded-3xl bg-primary p-3 text-primary-foreground sm:p-4">
 
             {/* Dashed inner border: a stitched-patch look */}
-            <div className="rounded-2xl border border-dashed border-primary-foreground/40 px-6 py-14 text-center sm:px-12 sm:py-20">
+            <div
+                className={cn(
+                    "rounded-2xl border border-dashed border-primary-foreground/40 px-6 py-14 text-center transition-opacity sm:px-12 sm:py-20",
+                    loading && "opacity-0"
+                )}
+                aria-busy={loading}
+            >
 
                 <p className="text-sm uppercase tracking-widest text-primary-foreground/80">
-                    For student makers
+                    {user ? "You're part of KraftHub" : "For student makers"}
                 </p>
 
                 <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-light font-heading sm:text-5xl">
-                    Made something you&rsquo;re proud of?
+                    {user
+                        ? `Ready to share your work, ${firstName}?`
+                        : "Made something you\u2019re proud of?"}
                 </h2>
 
                 <p className="mx-auto mt-4 max-w-md text-primary-foreground/80">
-                    Join KraftHub and put your work in front of students across campus.
+                    {user
+                        ? "Set up your profile and put your creations in front of students across campus."
+                        : "Join KraftHub and put your work in front of students across campus."}
                 </p>
 
                 <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
                     <Button asChild size="lg" variant="secondary">
-                        <Link to="/auth">Join KraftHub</Link>
+                        {user ? (
+                            <Link to="/profile">Go to your profile</Link>
+                        ) : (
+                            <Link to="/auth">Join KraftHub</Link>
+                        )}
                     </Button>
                     <Button
                         asChild
@@ -226,7 +249,7 @@ function JoinCta() {
                 <dl className="mx-auto mt-12 flex max-w-sm justify-center gap-12 border-t border-primary-foreground/20 pt-8">
                     <div>
                         <dt className="text-sm text-primary-foreground/80">Student stores</dt>
-                        <dd className="text-2xl font-light tabular-nums">{STORES.length}</dd>
+                        <dd className="text-2xl font-light tabular-nums">{STORES.filter((s) => !s.official).length}</dd>
                     </div>
                     <div>
                         <dt className="text-sm text-primary-foreground/80">Handmade products</dt>
@@ -247,7 +270,7 @@ function Home() {
         <div>
             <Hero />
 
-            <div className="flex flex-col gap-20 py-12 sm:gap-24 sm:py-16">
+            <div className="flex flex-col gap-30 py-12 sm:gap-24 sm:py-16">
                 <FeaturedCarousel />
                 <Storefronts />
                 <JoinCta />
