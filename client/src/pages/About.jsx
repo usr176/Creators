@@ -12,7 +12,7 @@ export default function About() {
 
             <div className="max-w-5xl mx-auto">
 
-                <header className="border-b pb-8">
+                <header className="border-b pb-8 ">
                     <h1 className="font-serif text-5xl font-bold tracking-tight sm:text-6xl">
                         About
                     </h1>
