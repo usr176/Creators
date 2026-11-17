@@ -1,30 +1,60 @@
+from app.models.user import User
+from app.extensions import db
 
-#temporary storage for users
-users = {}
+from werkzeug.security import (
+    generate_password_hash,
+    check_password_hash
+)
+
 
 def register_user(name, email, passw):
-    if email in users:
+
+    # Check if user already exists
+    existing_user = User.query.filter_by(
+        email=email
+    ).first()
+
+    if existing_user:
         return False, "User already exists."
 
-    users[email] = {
-        "name": name,
-        "email": email,
-        "password": passw
-    }
+
+    # Create new user
+    user = User(
+        name=name,
+        email=email,
+        password_hash=generate_password_hash(passw)
+    )
+
+
+    db.session.add(user)
+    db.session.commit()
+
 
     return True, "Registration Succesfull."
 
+
+
 def login_user(email, passw):
 
-    user = users.get(email)
+    # Find user by email
+    user = User.query.filter_by(
+        email=email
+    ).first()
+
 
     if not user:
         return False, None, "No such user exists."
 
-    if user["password"] != passw:
+
+    # Check password
+    if not check_password_hash(
+        user.password_hash,
+        passw
+    ):
         return False, None, "Incorrect Password"
 
+
     return True, {
-        "name": user["name"],
-        "email": user["email"]
+        "name": user.name,
+        "email": user.email
     }, "Login Succesfull."

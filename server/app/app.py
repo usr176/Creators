@@ -2,23 +2,29 @@ from flask import Flask
 from flask_cors import CORS
 from dotenv import load_dotenv
 from datetime import timedelta
-import os
 
 load_dotenv()
 
-class Config:
-    SECRET_KEY = os.getenv("SECRET_KEY")
-    FLASK_HOST = os.getenv("FLASK_HOST")
-    FLASK_PORT = os.getenv("FLASK_PORT")
+from app.config import Config
+from app.extensions import db, migrate
+
+#db models
+from app.models.user import User
 
 # routes
 from app.routes.home import home
 from app.routes.auth import auth
 
+
 def create_app():
 
     # configure flask app
     app = Flask(__name__)
+
+    app.config.from_object(Config)
+
+    db.init_app(app)
+    migrate.init_app(app, db)
 
     # configure secret key for sessions
     app.secret_key = Config.SECRET_KEY

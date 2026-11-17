@@ -1,0 +1,37 @@
+@baseUrl = http://127.0.0.1:5000
+
+
+### Register
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+    "name": "Umer",
+    "email": "umer@test.com",
+    "password": "123456"
+}
+
+
+### Login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "umer@test.com",
+    "password": "123456"
+}
+
+
+### Current User
+GET {{baseUrl}}/api/auth/me
+
+### Upload Image Test
+POST http://127.0.0.1:5000/api/upload-test
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+------WebKitFormBoundary
+Content-Disposition: form-data; name="image"; filename="test-image.png"
+Content-Type: image/png
+
+< ./1.webp
+------WebKitFormBoundary--
