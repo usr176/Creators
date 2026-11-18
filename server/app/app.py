@@ -10,10 +10,12 @@ from app.extensions import db, migrate
 
 #db models
 from app.models.user import User
+from app.models.product import Product
 
 # routes
 from app.routes.home import home
 from app.routes.auth import auth
+from app.routes.products import products
 
 
 def create_app():
@@ -55,6 +57,12 @@ def create_app():
     app.register_blueprint(
         auth,
         url_prefix="/api/auth"
+    )
+
+    # Product pages
+    app.register_blueprint(
+        products,
+        url_prefix="/api/products"
     )
     
     return app

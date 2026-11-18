@@ -16,7 +16,7 @@ def upload_image(file, folder="general"):
 
     result = cloudinary.uploader.upload(
         file,
-        folder="krafthub"
+        folder=f"krafthub/{folder}"
     )
 
 
